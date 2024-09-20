@@ -3,6 +3,7 @@ channels:
     - bioconda
 dependencies:
     - python=3.12
+    - nextflow
     - bowtie2
     - samtools
     - bedtools
