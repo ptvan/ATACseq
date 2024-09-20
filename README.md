@@ -26,12 +26,25 @@ After this you have two options:
 
 5a. Change the `params.xxx` section of `ATACseq_workflow.nf` to change tool parameters (or pass them in when calling `nextflow run` in step 6a below)
 
-6a. Run the workflow: ```nextflow run https://github.com/ptvan/ATACseq -r main --input <local_input_dir_containing_FASTQs> --output ~/<local_output_dir>```
+6a. Run the workflow: 
+```
+nextflow run https://github.com/ptvan/ATACseq -r main --input <local_input_dir_containing_FASTQs> --output ~/<local_output_dir>
+```
 
 ## OPTION B: Run with dockerized tools:
 
-4b. Pull the docker containing all the tools from: [nulzilla/atacseq-dkr](https://hub.docker.com/repository/docker/nulzilla/atacseq-dkr/general): ```docker pull nulzilla/atacseq-dkr```
+4b. Pull the docker containing all the tools from: [nulzilla/atacseq-dkr](https://hub.docker.com/repository/docker/nulzilla/atacseq-dkr/general): 
+```
+docker pull nulzilla/atacseq-dkr
+```
 
-5a. Start up the docker with your `FASTQ_directory/` and `Databases/` mounted : ```docker run -it -v ./:/pipeline/nextflow:ro -v <FASTQ_directory>:/root/working/raw_data -v <your_Databases_dir>:/root/working/Databases:ro 54e430cae105 /bin/bash```
+5a. Start up the docker with your `FASTQ_directory/` and `Databases/` mounted : 
 
-6b. Run the workflow: ```nextflow run /pipeline/main.nf --input ~/working/raw_data/input/ --output ~/working/raw_data/output/```
+```
+docker run -it -v ./:/pipeline/nextflow:ro -v <FASTQ_directory>:/root/working/raw_data -v <your_Databases_dir>:/root/working/Databases:ro <$DOCKER_IMAGE_ID> /bin/bash
+```
+
+6b. Run the workflow: 
+```
+nextflow run /pipeline/main.nf --input ~/working/raw_data/input/ --output ~/working/raw_data/output/
+```
