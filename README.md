@@ -1,7 +1,7 @@
 # ATACSeq Nextflow workflow
 
 This workflow takes FASTQs, performs alignment, QC, and peak-calling for ATACSeq analysis. Additional annotation
-and analyses are found in [ATACSeq_postpeakcalling_workflow.R](https://github.com/ptvan/workflows/blob/master/R/ATACSeq_postpeakcalling_workflow.R)
+and analyses are found in [ATACSeq_postpeakcalling_workflow.R](https://github.com/ptvan/workflows/blob/master/R/ATACSeq_postpeakcalling_workflow.R).
 
 ## Prerequisites
 
@@ -10,11 +10,11 @@ and analyses are found in [ATACSeq_postpeakcalling_workflow.R](https://github.co
 - [bedtools](https://bedtools.readthedocs.io/en/latest/)
 - [deeptools](https://deeptools.readthedocs.io/en/latest/)
 - [MACS](https://github.com/macs3-project/MACS) currently `macs3` at the time of this workflow's completion
-- [picard](https://broadinstitute.github.io/picard/) _optional_ if you prefer to use it instead of `samtools` for removing duplicate reads, see `picard.nf`
+- [picard](https://broadinstitute.github.io/picard/) _optional_ if you prefer to use it instead of `samtools` for removing duplicate reads, uncomment in the appropriate line in `main.nf`
 
 ## Preparation
 
-1. Install bowtie2 index appropriate for your species after creating them from scratch or downloading from [here](https://benlangmead.github.io/aws-indexes/bowtie)  
+1. Install `bowtie2` index appropriate for your species after creating them from scratch or downloading from [here](https://benlangmead.github.io/aws-indexes/bowtie)  
 2. Similarly, install blacklist files appropriate for your species from [here](https://github.com/Boyle-Lab/Blacklist) in a `Databases_directory/` 
 3. Create `FASTQ_directory/` where your input FASTQs reside and `output_directory/` where you want outputs to go
 
@@ -24,7 +24,7 @@ After this you have two options:
 
 4a. Install all tools above locally and verify that they are callable from the command prompt 
 
-5a. Change the `params.xxx` section of `main.nf` to change tool parameters. Alternatively, you pass them in when calling `nextflow run` in step 6a below)
+5a. Edit the `params.xxx` section of `main.nf` to change tool parameters. Alternatively, you can pass parameters in when calling `nextflow run` in step 6a below
 
 6a. Run the workflow: 
 ```
