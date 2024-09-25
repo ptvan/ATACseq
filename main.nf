@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl=2
-params.suffix = "*_R{1,2}.trimmed.fastq.gz"
+// params.suffix = "*_R{1,2}.trimmed.fastq.gz"
 params.alignmentProgram = "bowtie2"
 params.alignmentParams = "--local --very-sensitive --no-mixed --no-discordant -I 25 -X 700 -x "
 params.referenceGenome = "$HOME/working/Databases/GCRh38_ATACseq"
@@ -17,7 +17,7 @@ include { FILTERBLACKLISTREGIONS; BAMTOBED; BAMTOBEDPE } from './bedtools.nf'
 include { ALIGNMENTSIEVE; BAMCOVERAGE } from './deeptools.nf'
 include { CALLPEAKS } from './MACS.nf'
 
-if (params.help || params.input == null || params.output == null){
+if (params.help || params.csv == null || params.output == null){
     helpMessage()
     exit 1
 }
@@ -25,17 +25,22 @@ if (params.help || params.input == null || params.output == null){
 def helpMessage() {
     log.info"""
     Usage:
-    nextflow run ATACseq_workflow.nf --input <> --output <>
+    nextflow run ATACseq_workflow.nf --csv <> --output <>
     
     Required Arguments:
-      --input        Path to .fasta.gz input files 
+      --csv          Path to samplesheet CSV
       --output       Path to store output files 
     
     """.stripIndent()
 }
 
+
+
 workflow {
-    raw_reads = Channel.fromFilePairs("${params.input}/${params.suffix}")
+    raw_reads = Channel.fromPath( params.csv )
+        .splitCsv( header: true)
+        .map { row -> tuple( row.sampleID, file(row.read1), file(row.read2) ) } 
+        
     aligned_reads = ALIGNTOGENOME(raw_reads)
     noChrM_reads = REMOVEMITOREADS(aligned_reads)
     readgroup_reads = ADDREADGROUPS(noChrM_reads)

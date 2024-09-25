@@ -1,4 +1,5 @@
 .nextflow.log*
 .nextflow/*
 work/*
+input/*
 .DS_Store

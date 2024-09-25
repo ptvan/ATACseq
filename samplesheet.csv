@@ -1,0 +1,3 @@
+sampleID,read1,read2
+sample1,input/sample1_R1.trimmed.fastq.gz,input/sample1_R2.trimmed.fastq.gz
+sample2,input/sample2_R1.trimmed.fastq.gz,input/sample2_R2.trimmed.fastq.gz
