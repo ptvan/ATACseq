@@ -1,7 +1,6 @@
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl=2
-// params.suffix = "*_R{1,2}.trimmed.fastq.gz"
 params.alignmentProgram = "bowtie2"
 params.alignmentParams = "--local --very-sensitive --no-mixed --no-discordant -I 25 -X 700 -x "
 params.referenceGenome = "$HOME/working/Databases/GCRh38_ATACseq"

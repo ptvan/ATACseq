@@ -11,6 +11,7 @@ process RANDSAMPLE {
   
   script:
   """
+  #!/usr/bin/env bash
   macs3 randsample \
   -i ${bam_ch} \
   -f BAMPE \
@@ -31,6 +32,7 @@ process CALLPEAKS {
 
     script:
     """
+    #!/usr/bin/env bash
     macs3 callpeak \
     -f BEDPE \
     --nomodel \

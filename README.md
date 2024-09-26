@@ -16,7 +16,7 @@ and analyses are found in [ATACSeq_postpeakcalling_workflow.R](https://github.co
 
 1. Install `bowtie2` index appropriate for your species after creating them from scratch or downloading from [here](https://benlangmead.github.io/aws-indexes/bowtie)  
 2. Similarly, install blacklist files appropriate for your species from [here](https://github.com/Boyle-Lab/Blacklist) in a `Databases_directory/` 
-3. Create `output_directory/` where you want outputs to go and a `CSV` samplesheet
+3. Create `output_directory/` where you want outputs to go and edit `samplesheet.csv` to name your samples and point to your FASTQ files
 
 After this you have two options:
 
@@ -26,9 +26,7 @@ After this you have two options:
 
 5a. Edit the `params.xxx` section of `main.nf` to change tool parameters. Alternatively, you can pass parameters in when calling `nextflow run` in step 6a below
 
-6a. Edit `samplesheet.csv` to point to your FASTQ files
-
-7a. Run the workflow: 
+6a. Run the workflow: 
 ```
 nextflow run https://github.com/ptvan/ATACseq -r main --csv <samplesheet.csv> --output ~/<output_directory>
 ```
@@ -46,9 +44,7 @@ docker pull nulzilla/atacseq-dkr
 docker run -it -v ./:/pipeline/nextflow:ro -v <FASTQ_directory>:/root/working/raw_data -v <Databases_directory/>:/root/working/Databases:ro <$DOCKER_IMAGE_ID> /bin/bash
 ```
 
-6b. Edit `samplesheet.csv` to point to your FASTQ files
-
-7b. Run the workflow on mounted directories inside the Docker image:
+6b. Run the workflow on mounted directories inside the Docker image:
 ```
 nextflow run /pipeline/main.nf --csv --output ~/working/raw_data/output/
 ```

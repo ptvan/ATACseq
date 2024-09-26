@@ -13,6 +13,8 @@ process ALIGNMENTSIEVE {
 
     script:
     """
+    #!/usr/bin/env bash
+    
     alignmentSieve \
     --verbose \
     --ATACshift \

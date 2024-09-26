@@ -14,6 +14,7 @@ process FILTERBLACKLISTREGIONS {
 
   script:
   """
+  #!/usr/bin/env bash
   bedtools intersect -nonamecheck -v -abam ${input_bam_ch} -b ${bed_file} | samtools sort -o ${input_bam_ch.baseName}.blacklisted.bam
   samtools index ${input_bam_ch.baseName}.blacklisted.bam -o ${input_bam_ch.baseName}.blacklisted.bai
   """    
@@ -29,6 +30,7 @@ process BAMTOBED {
 
   script:
   """
+  #!/usr/bin/env bash
   bedtools bamtobed -i ${input_bam_ch} > ${bed_ch.baseName}.bed
   """    
 }
@@ -44,6 +46,7 @@ process BAMTOBEDPE {
 
   script:
   """
+  #!/usr/bin/env bash
   bedtools bamtobed -i ${input_bam_ch} -bedpe > ${sample}.bedPE
   """    
 }
