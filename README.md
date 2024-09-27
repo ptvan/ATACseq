@@ -1,5 +1,7 @@
 # ATACSeq Nextflow workflow
 
+![ATACseq screenshot](ATACseq_nf_screenshot.png)
+
 This workflow takes FASTQs, performs alignment, QC, and peak-calling for ATACSeq analysis. Additional annotation
 and analyses are found in [ATACSeq_postpeakcalling_workflow.R](https://github.com/ptvan/workflows/blob/master/R/ATACSeq_postpeakcalling_workflow.R).
 
